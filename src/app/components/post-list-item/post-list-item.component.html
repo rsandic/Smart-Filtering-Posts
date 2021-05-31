@@ -1,0 +1,7 @@
+<li class="list-group-item d-flex justify-content-between">
+    <div style="cursor: pointer" routerLink="{{ post.id }}" class="d-flex align-items-center"><span style="font-weight: bold">{{post.title}}</span> - created by user id <span style="font-weight: bold">{{post.userId}}</span></div>
+    <div>
+        <button class="btn btn-danger" (click)="deletePost()">Delete post</button>
+    </div>
+</li>
+

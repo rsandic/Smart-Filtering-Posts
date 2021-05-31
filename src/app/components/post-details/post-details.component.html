@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row" *ngIf="post">
+        <div class="col">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Post title</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" [ngModel]="post.title">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Post body</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" [ngModel]="post.body"></textarea>
+            </div>
+            <div class="mb-3">
+                <label> Created by userId {{post.userId}}</label>
+            </div>
+
+            <div class="mb-3">
+                <label style="font-weight: bold">Comments</label>
+                <ul class="list-group">
+                    <div class="list-group-item" *ngFor="let comment of postComments"><span style="font-style: italic">{{comment.body}}</span> <br>Left by user with email <span style="font-weight: bold">{{comment.email}}</span> </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

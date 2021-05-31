@@ -1,0 +1,13 @@
+.alert-wr {
+    position: fixed;
+    min-width: 200px;
+    top: 55px;
+    right: 25px;
+    padding-right: 30px;
+    z-index: 999;
+    opacity: 0.9;
+    &:hover
+    {
+        opacity: 1 !important;
+    }
+}

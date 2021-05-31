@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
+//fonts
+@import "../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/brands.scss";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/regular.scss";
+
+//bootstrap css
+@import "node_modules/bootstrap/scss/bootstrap";
+
+
+//custom styles, this can be separated in othet .scss files
+.post-list-wr{
+    max-height: 500px;
+    overflow-y: scroll;
+}

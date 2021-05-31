@@ -1,0 +1,49 @@
+<app-filters *ngIf="uniqueUserIds"
+             (onFiltersChange)="listenFilters($event)"
+             [uniqueUserIds]="uniqueUserIds">
+</app-filters>
+
+
+<div class="row mt-3 mb-3">
+    <div class="col ">
+        <button class="btn btn-primary"
+                (click)="toggleNewPostFormVisibility()">
+            Add new post
+        </button>
+    </div>
+</div>
+
+<div class="row mt-3 mb-3" *ngIf="newPostFormVisible">
+    <form class="form-horizontal" [formGroup]="newPostForm" (ngSubmit)="addNewPost()">
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Post title</label>
+            <input type="text" class="form-control" formControlName="title" id="exampleFormControlInput1" placeholder="Post title">
+            <span style="color:red" *ngIf="(!newPostForm.get('title').valid && newPostForm.get('title').touched) || (!newPostForm.get('title').valid && clickedFormSubmit)" class="error">This field is required</span>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Post body</label>
+            <textarea class="form-control" formControlName="body" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <span style="color: red" *ngIf="(!newPostForm.get('body').valid && newPostForm.get('body').touched) || (!newPostForm.get('body').valid && clickedFormSubmit)" class="error">This field is required</span>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary me-1">Add Post</button>
+            <button type="button" class="btn btn-danger" (click)="toggleNewPostFormVisibility()">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<div class="row mt-3">
+    <div class="col">
+        <div class="post-list-wr" >
+            <ul class="list-group">
+                <app-post-list-item *ngFor="let postItem of posts  |
+                                    filter:{userId : filters.userId} |
+                                    filterContains:{ title : filters.querySearch} |
+                                    slice:0:filters.numberOfPostToShow"
+                                    [post]="postItem"
+                                    (deleteEmit)="deletePost($event)">
+                </app-post-list-item>
+            </ul>
+        </div>
+    </div>
+</div>
