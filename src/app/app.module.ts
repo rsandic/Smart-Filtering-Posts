@@ -11,7 +11,6 @@ import {HttpClientModule} from '@angular/common/http';
 import { FiltersComponent } from './components/filters/filters.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ArrayFilterPipe} from './pipes/array-fillter.pipe';
-import {ArrayQuerySearchPipe} from './pipes/array-query-search.pipe';
 import { PostDetailsComponent } from './components/post-details/post-details.component';
 import { AlertComponent } from './components/alert/alert.component';
 
@@ -24,7 +23,6 @@ import { AlertComponent } from './components/alert/alert.component';
         PostListItemComponent,
         FiltersComponent,
         ArrayFilterPipe,
-        ArrayQuerySearchPipe,
         PostDetailsComponent,
         AlertComponent
     ],

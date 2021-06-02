@@ -52,15 +52,30 @@ export class PostListComponent implements OnInit {
         this.filters = filtersValue;
     }
 
+    filterPostsByQuery(): Post[] {
+        if (this.filters.querySearch == null || this.filters.querySearch === '') {
+            return this.posts;
+        }
+        const matchTitle: Post[] = [];
+        const containTitle: Post[] = [];
+
+        this.posts.forEach((post: Post) => {
+            // if (post.title.startsWith(this.filters.querySearch)) {
+            if (post.title.substring(0, this.filters.querySearch.length).toLowerCase() === this.filters.querySearch.toLowerCase()) {
+                matchTitle.push(post);
+            } else if (post.title.toLowerCase().includes(this.filters.querySearch.toLowerCase())) {
+                containTitle.push(post);
+            }
+        });
+
+        return [...matchTitle, ...containTitle];
+    }
+
     deletePost(id: number): void {
         const index = this.posts.findIndex((p) => {
             return p.id === id;
         });
         this.posts.splice(index, 1);
-    }
-
-    toggleNewPostFormVisibility(): void {
-        this.newPostFormVisible = !this.newPostFormVisible;
     }
 
     addNewPost(): void {
@@ -73,7 +88,12 @@ export class PostListComponent implements OnInit {
                     this.posts.unshift(this.newPostForm.value);
                     this.newPostFormVisible = false;
                     this.clickedFormSubmit = false;
-                    this.newPostForm.reset();
+                    this.newPostForm.reset({
+                        id: null,
+                        userId: 1,
+                        title: null,
+                        body: null
+                    });
                     this.alertService.success('New Post added');
                 },
                 (error) => {
@@ -83,5 +103,7 @@ export class PostListComponent implements OnInit {
         }
     }
 
-
+    toggleNewPostFormVisibility(): void {
+        this.newPostFormVisible = !this.newPostFormVisible;
+    }
 }

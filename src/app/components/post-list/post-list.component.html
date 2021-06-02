@@ -18,12 +18,12 @@
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Post title</label>
             <input type="text" class="form-control" formControlName="title" id="exampleFormControlInput1" placeholder="Post title">
-            <span style="color:red" *ngIf="(!newPostForm.get('title').valid && newPostForm.get('title').touched) || (!newPostForm.get('title').valid && clickedFormSubmit)" class="error">This field is required</span>
+            <span *ngIf="(!newPostForm.get('title').valid && newPostForm.get('title').touched) || (!newPostForm.get('title').valid && clickedFormSubmit)" class="error text-danger">This field is required</span>
         </div>
         <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">Post body</label>
             <textarea class="form-control" formControlName="body" id="exampleFormControlTextarea1" rows="3"></textarea>
-            <span style="color: red" *ngIf="(!newPostForm.get('body').valid && newPostForm.get('body').touched) || (!newPostForm.get('body').valid && clickedFormSubmit)" class="error">This field is required</span>
+            <span *ngIf="(!newPostForm.get('body').valid && newPostForm.get('body').touched) || (!newPostForm.get('body').valid && clickedFormSubmit)" class="error text-danger">This field is required</span>
         </div>
         <div class="mb-3">
             <button type="submit" class="btn btn-primary me-1">Add Post</button>
@@ -34,16 +34,18 @@
 
 <div class="row mt-3">
     <div class="col">
-        <div class="post-list-wr" >
+        <div class="post-list-wr">
             <ul class="list-group">
-                <app-post-list-item *ngFor="let postItem of posts  |
+                <app-post-list-item *ngFor="let postItem of filterPostsByQuery() |
                                     filter:{userId : filters.userId} |
-                                    filterContains:{ title : filters.querySearch} |
                                     slice:0:filters.numberOfPostToShow"
                                     [post]="postItem"
                                     (deleteEmit)="deletePost($event)">
                 </app-post-list-item>
             </ul>
+            <div class="text-center text-danger" *ngIf="(filterPostsByQuery() | filter:{userId : filters.userId} | slice:0:filters.numberOfPostToShow).length == 0">
+                No Posts for search criteria
+            </div>
         </div>
     </div>
 </div>
